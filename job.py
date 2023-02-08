@@ -152,11 +152,11 @@ class Job:
             date = self._date_matcher.findall(resp.text)
             klass = self._class_matcher.findall(resp.text)
 
-            if len(date) < 1 or len(klass) < 1:
+            if len(date) < 1 and len(klass) < 1:
                 return False, self._bad_info
 
             self._date = date[0]
-            self._class = klass[0]
+            self._class = self._class = None if len(klass) == 0 else klass[0]
 
             return True, ''
         except Exception as e:
